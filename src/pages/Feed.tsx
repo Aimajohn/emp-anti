@@ -108,6 +108,7 @@ function Feed({ general, setGeneral, userInfo }: IMyProps) {
               formulario?.reset()
               addTask(miData)
               secretButton?.click()
+              window.scrollTo(0,0)
             }
             }>Agregar <button className="hidden" id="cerradito">cerrar</button></div>
           </div>

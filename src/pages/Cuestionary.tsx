@@ -17,7 +17,7 @@ function Cuestionary({ tiempo, setTiempo }: Props) {
     return (
         <div className='px-4 mt-12 bg-base-100  pt-6'>
             <h4 className='text-xl font-semibold font-Montserrat'>En que horas del dia estas disponible para el trabajo por la mañana?</h4>
-            <div className="form-control mt-6 pb-36" id='cuestionary'>
+            <div className="form-control mt-6" id='cuestionary'>
                 <label className="label cursor-pointer flex justify-start gap-4 text-lg mb-2">
                     <input type="checkbox" value="6"  className="checkbox checkbox-primary" />
                     <span className="label-text">6am - 7am</span>
@@ -42,17 +42,18 @@ function Cuestionary({ tiempo, setTiempo }: Props) {
                     <input type="checkbox" value="11" className="checkbox checkbox-primary" />
                     <span className="label-text">11am - 12am</span>
                 </label>
-                <label className="label cursor-pointer flex justify-start gap-4 text-lg mb-2">
+                <label className="label cursor-pointer flex justify-start gap-4 text-lg ">
                     <input type="checkbox" value="N/A" className="checkbox checkbox-primary" />
                     <span className="label-text">Ninguna de las anteriores</span>
                 </label>
             </div>
+            <div className=' flex justify-around mb-12'>
                 <Link to="/Feed">
-                <button className="btn btn-neutral mt-12 absolute left-12" >Anterior</button>
+                <button className="btn btn-neutral mt-12 " onClick={()=>window.scrollTo(0,0)}>Anterior</button>
 
                 </Link>
                 <Link to="/CuestionaryTarde">
-                <button className="btn btn-secondary mt-12 absolute right-12" onClick={
+                <button className="btn btn-secondary mt-12 " onClick={
                     ()=>{
                         const formi = document.getElementById('cuestionary')?.children
                         if(!formi) return;
@@ -65,10 +66,14 @@ function Cuestionary({ tiempo, setTiempo }: Props) {
                         setTiempo({...tiempo, manana: horas})
 
                         localStorage.setItem('tiempo',JSON.stringify({...tiempo, manana: horas}))
+                        window.scrollTo(0,0)
                     }
+                    
                 }>Siguiente</button>
 
                 </Link>
+
+            </div>
         </div>
 
     )

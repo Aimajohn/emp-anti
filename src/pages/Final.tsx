@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import emailjs from "@emailjs/browser";
+
 
 interface userInfo {
     name: string,
@@ -26,9 +28,33 @@ import { AiTwotoneAlert } from 'react-icons/ai'
 import { BiSolidHappyBeaming } from 'react-icons/bi'
 import { BsFillEmojiNeutralFill } from 'react-icons/bs'
 import { GoAlertFill } from 'react-icons/go'
+type FormValues = {
+    name: string;
+    email: string;
+    title: string;
+    text: string;
+  };
 
 
 function Final({ userInfo, general, tiempo }: Props) {
+
+    async function mail (values: FormValues){
+        try {
+          const result = await emailjs.send(
+              "service_7mvg1rk",
+              "template_uft29ye",
+              values ,
+              "2XmBsJNpd-97J62si"
+            )
+            console.log(result)
+          
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+
+
     const orden: string[][][] = [[], [], [], []]
     const ordenTiempo: string[][] = [[], [], [], []]
     general.forEach(tarea => {
@@ -121,7 +147,15 @@ function Final({ userInfo, general, tiempo }: Props) {
             <div className='w-full pb-12 min-h-fit'>
             <Link to="/Login" className='w-fit h-fit mx-auto block my-12'>
                 <button className="btn btn-neutral   " onClick={() => {
+                    mail({
+                        name: userInfo.name,
+                        email: userInfo.email,
+                        title: JSON.stringify(todosTiempos),
+                        text: JSON.stringify(todos)
+
+                    })
                     localStorage.clear()
+                    window.scrollTo(0,0)
                 }}>Abandonar página</button>
             </Link>
 
