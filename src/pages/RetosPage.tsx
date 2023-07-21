@@ -3,7 +3,11 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 type Props = {};
-
+import female_avatar from '/female_avatar.svg'
+import female_avatar2 from '/female_avatar.svg'
+import male_avatar from '/female_avatar.svg'
+import random_avatar from '/random_avatar.svg'
+import pic_profile from '/pic_profile.svg'
 function RetosPage({}: Props) {
   let counter = 25;
   let contando = 60;
@@ -74,27 +78,27 @@ function RetosPage({}: Props) {
         <div className="indicator avatar">
           <span className="badge badge-secondary indicator-item">+10</span>
           <div className="h-20 w-20 rounded-lg drop-shadow-lg">
-            <img src="/female_avatar.svg" />
+            <img src={female_avatar} />
           </div>
         </div>
         <div className="indicator avatar">
           <div className="h-20 w-20 rounded-lg">
-            <img src="/random_avatar.svg" />
+            <img src={random_avatar} />
           </div>
         </div>
         <div className="indicator avatar">
           <div className="h-20 w-20 rounded-lg">
-            <img src="/pic_profile.svg" />
+            <img src={pic_profile} />
           </div>
         </div>
         <div className="indicator avatar">
           <div className="h-20 w-20 rounded-lg">
-            <img src="/male_avatar.svg" />
+            <img src={male_avatar} />
           </div>
         </div>
         <div className="indicator avatar">
           <div className="h-20 w-20 rounded-lg">
-            <img src="/female_avatar2.svg" />
+            <img src={female_avatar2} />
           </div>
         </div>
       </div>

@@ -1,15 +1,21 @@
 
 type Props = {};
+import { Link } from 'react-router-dom';
+import male_avatar from '/male_avatar.svg'
 
 function Navbar({}: Props) {
   return (
-    <div className="navbar mb-5 bg-base-100 font-Poppins">
+    <div className="navbar mb-5 lg:bg-base-100 font-Poppins">
       <div className="flex-1">
-        <a href="/" className="btn-ghost btn p-4 text-2xl font-extrabold normal-case">
-          Plan Anti-Procrastinacion
-        </a>
+        <Link to="/Feed" className="btn-ghost btn pt-10 lg:p-4 text-3xl lg:text-2xl font-extrabold mx-auto lg:mx-0 normal-case text-slate-100">
+          Plangie  <b className='font-bold text-5xl inline-block -mt-1 -ml-2 text-purple-600'>.</b>
+          {/* <b className='text-purple-800 inline -ml-2'>angie</b> */}
+        </Link>
       </div>
-      <div className="flex-none gap-2">
+      <div className="hidden lg:block flex-none gap-2">
+        <Link to={'/Friends'}>
+          Amigos
+        </Link>
         <div className="form-control">
           <input
             type="text"
@@ -20,7 +26,7 @@ function Navbar({}: Props) {
         <div className="dropdown-end dropdown">
           <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
             <div className="w-10 rounded-full">
-              <img src="/male_avatar.svg" />
+              <img src={male_avatar} />
             </div>
           </label>
           <ul
@@ -30,9 +36,9 @@ function Navbar({}: Props) {
             <li>
               <div className="stat">
                 <div className="stat-value">86%</div>
-                <div className="stat-title">Tasks done</div>
+                <div className="stat-title">Tareas completadas</div>
                 <div className="stat-desc text-secondary">
-                  31 tasks remaining
+                  31 pendientes
                 </div>
               </div>
             </li>
@@ -54,9 +60,9 @@ function Navbar({}: Props) {
                     ></path>
                   </svg>
                 </div>
-                <div className="stat-title">Total Likes</div>
-                <div className="stat-value text-primary">25.6K</div>
-                <div className="stat-desc">21% more than last month</div>
+                <div className="stat-title">Puntos Totales</div>
+                <div className="stat-value text-primary">250pts</div>
+                <div className="stat-desc">21% mas que el mes pasado</div>
               </div>
             </li>
           </ul>

@@ -1,38 +1,108 @@
+import {  useNavigate } from "react-router-dom";
 
-type Props = {};
+import login_img from '/login_img.svg'
+import {useState} from 'react'
 
-function Login({}: Props) {
+interface userInfo{
+  name: string,
+  email: string
+}
+
+type Props = {
+  setUserInfo:  React.Dispatch<React.SetStateAction<userInfo>>
+};
+
+
+
+function Login({setUserInfo}: Props) {
+  const [divError, setDivError] = useState(false)
+  const [erroresLogin, setErroresLogin] = useState('')
+  const navigate = useNavigate()
+
+  function validate (name:string, email:string){
+    let errores = ''
+    console.log(name, email)
+    if (!name) {
+      errores = "Ingresa un nombre";
+    } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(name)) {
+      errores = "El nombre solo puede contener letras y espacios ";
+    }
+
+    if (!email) {
+      errores = "Ingresa un correo";
+    } else if (
+      !/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email)
+    ) {
+      errores =
+        "El correo debe ser válido, solo puede contener letras, numeros, puntos y guiones";
+    }
+    console.log(errores)
+    return(errores)
+  }
+
   return (
-    <div className="mx-12 flex flex-col gap-10 lg:flex-row">
-      <div className="card rounded-box grid flex-grow  place-items-center bg-red-100">
-        <img className="w-96" src="/login_img.svg" alt="" />
+    <div className="lg:mx-12 flex flex-col gap-10 lg:flex-row">
+      <div className="card rounded-box hidden lg:grid flex-grow  place-items-center bg-red-100">
+        <img className="w-96" src={login_img} alt="" />
       </div>
-      <div className="card rounded-box grid font-Poppins flex-grow place-items-center pb-60 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 py-12">
-        <div className="form-control w-full max-w-xs">
-            <h2 className="text-3xl text-white font-Poppins font-bold text-center mb-7 ">Iniciar Sesión</h2>
+      <div className="card rounded-none lg:rounded-box w-full lg:grid flex-grow place-items-center lg:bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 py-12 pb-60 font-Poppins">
+        <form className="form-control w-10/12 lg:w-full max-w-xs" id="loginForm">
+          <h2 className="mb-7 hidden lg:block text-center font-Poppins text-3xl font-bold text-white ">
+            Iniciar Sesión
+          </h2>
           <label className="label">
-            <span className="label-text text-white">Username</span>
+            <span className="label-text text-white">Nombre</span>
           </label>
           <input
             type="text"
-            placeholder="Username"
+            name="username"
+            placeholder="Nombre"
             className="input-bordered input w-full max-w-xs"
           />
           <label className="label">
-            <span className="label-text text-white">Password</span>
+            <span className="label-text text-white">Correo</span>
           </label>
           <input
-            type="password"
-            placeholder="Password"
-            className="input-bordered input w-full max-w-xs mb-10"
+          name="email"
+            type="email"
+            placeholder="Email"
+            className="input-bordered input mb-10 w-full max-w-xs"
           />
-          <button className="btn btn-primary" onClick={()=>location.href='/feed'} >Iniciar sesion</button>
-          <label className="label ">
-            <a className="text-center w-full text-sm hover:!text-white hover:cursor-pointer hover:underline text-white">
+          
+              <button 
+            className="btn-primary btn"
+              
+              onClick={
+                (e)=>{
+                  e.preventDefault()
+                  const miForm = document.getElementById('loginForm') as HTMLFormElement
+                  if(!miForm) return
+                  const data = new FormData(miForm)
+                  const validacion = validate(data.get('username') as string, data.get('email')as string)
+                  setErroresLogin( validacion)
+                  if(!!validacion){
+                    return setDivError(true)
+                  }
+                  setDivError(false)
+                  setUserInfo({
+                    name: data.get('username') as string ,
+                    email: data.get('email') as string  
+                  }) 
+                  return navigate("/Feed")
+
+                  
+                }
+              }>
+              Empezar
+
+              </button>
+             {divError? <h1 className="text-white my-4">{erroresLogin}</h1> :null}
+          {/* <label className="label ">
+            <a className="w-full text-center text-sm text-white hover:cursor-pointer hover:!text-white hover:underline">
               Olvidaste tu contraseña?
             </a>
-          </label>
-        </div>
+          </label> */}
+        </form>
       </div>
     </div>
   );
