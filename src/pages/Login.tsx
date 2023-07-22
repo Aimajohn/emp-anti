@@ -1,25 +1,34 @@
 import { useNavigate } from "react-router-dom";
 
 import login_img from "/login_img.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface userInfo {
   name: string;
   email: string;
 }
+interface todo {
+  titulo: string;
+  descripcion: string;
+  prioridad: string;
+  tiempo: string;
+}
 
 type Props = {
   setUserInfo: React.Dispatch<React.SetStateAction<userInfo>>;
+  setGeneral: React.Dispatch<React.SetStateAction<todo[]>>;
 };
 
-function Login({ setUserInfo }: Props) {
+function Login({ setUserInfo, setGeneral }: Props) {
   const [divError, setDivError] = useState(false);
   const [erroresLogin, setErroresLogin] = useState("");
   const navigate = useNavigate();
+  useEffect(() => {
+    setGeneral([] as todo[]);
+  }, []);
 
   function validate(name: string, email: string) {
     let errores = "";
-    console.log(name, email);
     if (!name) {
       errores = "Ingresa un nombre";
     } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(name)) {
@@ -34,7 +43,6 @@ function Login({ setUserInfo }: Props) {
       errores =
         "El correo debe ser válido, solo puede contener letras, numeros, puntos y guiones";
     }
-    console.log(errores);
     return errores;
   }
 
