@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import emailjs from "@emailjs/browser";
 
 
@@ -37,6 +37,7 @@ type FormValues = {
 
 
 function Final({ userInfo, general, tiempo }: Props) {
+    const navigate = useNavigate()
 
     async function mail (values: FormValues){
         try {
@@ -129,7 +130,7 @@ function Final({ userInfo, general, tiempo }: Props) {
                             <h2 className="card-title font-bold ">
                                 {tarea[0]}
                             </h2>
-                            <p className="text-small  text-left">{`${tarea[4]}am - ${tarea[5]}am`}</p>
+                            <p className="text-small  text-left">{`${tarea[4]}${tarea[3] !=1 ?'pm':'am'} - ${tarea[5]}${tarea[3] !=1 ?'pm':'am'}`}</p>
 
                             </div>
                             <p>{tarea[1]}</p>
@@ -145,19 +146,19 @@ function Final({ userInfo, general, tiempo }: Props) {
                 ))}
             </div>
             <div className='w-full pb-12 min-h-fit'>
-            <Link to="/Login" className='w-fit h-fit mx-auto block my-12'>
-                <button className="btn btn-neutral   " onClick={() => {
-                    mail({
+                <button className="btn btn-neutral   mx-auto block my-12" onClick={async() => {
+                    const awee = await mail({
                         name: userInfo.name,
                         email: userInfo.email,
                         title: JSON.stringify(todosTiempos),
                         text: JSON.stringify(todos)
 
                     })
+                    console.log(awee)
                     localStorage.clear()
                     window.scrollTo(0,0)
+                    navigate("/Login")
                 }}>Abandonar página</button>
-            </Link>
 
             </div>
 

@@ -15,7 +15,7 @@ type Props = {
 function Cuestionary({ tiempo, setTiempo }: Props) {
     return (
         <div className='px-4 mt-12 bg-base-100  pt-6'>
-            <h4 className='text-xl font-semibold font-Montserrat'>En que horas del dia estas disponible para el trabajo por la tarde?</h4>
+            <h4 className='text-xl font-semibold font-Montserrat'>En qué horas de la tarde estás disponible para el trabajo?</h4>
             <div className="form-control mt-6" id='cuestionary2'>
                 <label className="label cursor-pointer flex justify-start gap-4 text-lg mb-2">
                     <input type="checkbox" value="0" className="checkbox checkbox-primary" />
@@ -45,7 +45,6 @@ function Cuestionary({ tiempo, setTiempo }: Props) {
                     <input type="checkbox" value="N/A" className="checkbox checkbox-primary" />
                     <span className="label-text">Ninguna de las anteriores</span>
                 </label>
-            </div>
             <div className='flex justify-around mb-12'>
             <Link to="/Cuestionary">
                 <button className="btn btn-neutral mt-12 " onClick={()=>window.scrollTo(0,0)}>Anterior</button>
@@ -69,6 +68,7 @@ function Cuestionary({ tiempo, setTiempo }: Props) {
                 }>Siguiente</button>
 
                 </Link>
+            </div>
             </div>
         </div>
 

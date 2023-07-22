@@ -1,21 +1,24 @@
-
 type Props = {};
-import { Link } from 'react-router-dom';
-import male_avatar from '/male_avatar.svg'
+import { Link } from "react-router-dom";
+import male_avatar from "/male_avatar.svg";
 
 function Navbar({}: Props) {
   return (
-    <div className="navbar mb-5 lg:bg-base-100 font-Poppins">
+    <div className="navbar mb-5 font-Poppins">
       <div className="flex-1">
-        <Link to="/Feed" className="btn-ghost btn pt-10 lg:p-4 text-3xl lg:text-2xl font-extrabold mx-auto lg:mx-0 normal-case text-slate-100">
-          Plangie  <b className='font-bold text-5xl inline-block -mt-1 -ml-2 text-purple-600'>.</b>
+        <Link
+          to="/Feed"
+          className="btn-ghost btn mx-auto pt-10 text-3xl font-extrabold normal-case text-slate-100 lg:mx-0 lg:p-4 lg:text-3xl"
+        >
+          Plangie{" "}
+          <b className="-ml-2 -mt-1 inline-block text-5xl font-bold text-purple-600">
+            .
+          </b>
           {/* <b className='text-purple-800 inline -ml-2'>angie</b> */}
         </Link>
       </div>
-      <div className="hidden lg:block flex-none gap-2">
-        <Link to={'/Friends'}>
-          Amigos
-        </Link>
+      <div className="hidden flex-none gap-2 ">
+        <Link to={"/Friends"}>Amigos</Link>
         <div className="form-control">
           <input
             type="text"
@@ -37,12 +40,10 @@ function Navbar({}: Props) {
               <div className="stat">
                 <div className="stat-value">86%</div>
                 <div className="stat-title">Tareas completadas</div>
-                <div className="stat-desc text-secondary">
-                  31 pendientes
-                </div>
+                <div className="stat-desc text-secondary">31 pendientes</div>
               </div>
             </li>
-            
+
             <li>
               <div className="stat">
                 <div className="stat-figure text-primary">
